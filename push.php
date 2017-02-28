@@ -1,23 +1,24 @@
 <?php	
-	session_start();
+	include("session.php");
 	$_SESSION['login_user'];
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Notification</title>
 <!-- Latest compiled and minified CSS -->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="push.css" >
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<h4>Push Notifications</h4>
+<h1>Push Notifications</h1>
 
 <div class="alert alert-success" id="success" style="display: none;">Notification Sent Successfully.</div>
 <div class="alert alert-danger" id="danger" style="display: none;">Error Sending Message.</div> 
@@ -26,19 +27,20 @@
 <form id="form">
 
 	<div class="form-group row">
-		<label for="topic">USER</label>	
+		<label for="topic">User</label>	
 		<input type="text" class="form-control" readonly = "readonly" id="topic"  placeholder="Topic" value = "<?php echo $_SESSION['login_user'] ?>">
 	</div>
-	
 	<?php 
 		 if ($_SESSION['login_user'] == "admin"){
 		 	echo "<div class ='form-group row'>";
-			echo "<label>TOPIC</label>";
+			echo "<label>Topic</label>";
 			echo "<select class='form-control' readonly = 'readonly'>";
 				echo "<option>Select</option>";
-				echo "<option>eml</option>";
-				echo "<option>t5e</option>";
-				echo "<option>general</option>";
+				echo "<option>EML</option>";
+				echo "<option>T5E</option>";
+				echo "<option>SCHROETER</option>";
+				echo "<option>ELECTION</option>";
+				echo "<option>GENERAL</option>";
 			echo "</select>";
 			echo "</div>";
 		 }	
@@ -50,22 +52,37 @@
 	</div>
 	<div class="form-group row">
 		<label for="content">Content of Notification</label>
-		<input type="text" class="form-control" id="content" placeholder="Content">
+		<textarea type="text" class="form-control" id="content"placeholder ="Content"></textarea>
 	</div>
 </form>
+	<div class="text-center">
+	<div class="btn-group">
 	
-	<div class="row">
-	<button id="send" class="btn btn-primary">Send</button>
+	<button id="send" class="btn btn-primary" style="border-radius:5px 0px 0px 5px;">Send</button>
 	<button id="refresh" class="btn btn-primary">Refresh</button>
 		<?php 
-			if ($_SESSION['login_user'] == "admin" || $_SESSION['login_user']== "eml"){
-			echo "<a href='test_1.php' class='btn btn-primary'>Next Page</a>";
+			if ($_SESSION['login_user']== "eml"){	
+			echo "<a role ='button' href='test_1.php' class='btn btn-primary'>Lecture</a>";
+			echo "<a role ='button' href='question.php' class='btn btn-primary'>Question</a>";
+			echo "<a role ='button' href='feedback.php' class='btn btn-primary'>Feedback</a>";
 			}
 		?>
+		<?php 
+			if ($_SESSION['login_user']== "admin" ){
+			echo "<a role ='button' href='test_1.php' class='btn btn-primary'>Lecture</a>";
+			echo "<a role ='button' href='question.php' class='btn btn-primary'>Question</a>";
+			echo "<a role ='button' href='feedback.php' class='btn btn-primary'>Feedback</a>";
+			}
+		?>
+		
+	<a role ='button' href='logout.php' class='btn btn-primary' style="border-radius:0px 5px 5px 0px;">Logout</a>
+	
 	</div>
-
-
-
+	</div>
+	
+</div>
+<div class="copyright">
+     &copy Institute Mobops
 </div>
 
 <!-- jquery -->

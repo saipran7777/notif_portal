@@ -1,4 +1,7 @@
 <?php
+   include("session.php");
+   $_SESSION['login_user'];
+   
    $dbhost = 'localhost';
    $dbuser = 'root';
    $dbpass = '';
@@ -21,19 +24,20 @@
 
   <head>
     <title>EML</title>
-    <link rel="stylesheet" href="style_test_1.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
     
   </head>
 
   <body>
     
     <h1>Extra Mural Lectures</h1>
-    
+    <a role="button" href="logout.php" class="btn btn-primary">Logout</a>
     <?php
       echo "<section>";
       echo "<div class='header_table'>";
       echo "<table>";
-      echo "<thead><tr><th>Serial Number</th><th>Lecturer</th><th>Current Status</th></tr></thead>";
+      echo "<thead><tr><th width ='20%'>Serial Number</th><th>Lecturer</th><th width ='20%'>Current Status</th></tr></thead>";
       echo "</table>";
       echo "</div>";
       $count = 0;
@@ -42,13 +46,13 @@
       while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
         echo "<tr>";
           $count = $count + 1;
-          echo "<td> ".$count." </td> ";
+          echo "<td width ='20%'> ".$count." </td> ";
           echo "<td>".$row['name']."</td> ";
           if ($row['status'] == "1") {
-            echo "<td><label class='switch'> <input eid='".$row['id']."' status='".$row['status']."' id ='blue' class='toggle' type='checkbox' checked><div class='slider round'></div></label></td>";
+            echo "<td width ='20%'><label class='switch'> <input eid='".$row['id']."' status='".$row['status']."' id ='blue' class='toggle' type='checkbox' checked><div class='slider round'></div></label></td>";
           }
           else{
-            echo "<td><label class='switch'><input eid ='".$row['id']."' status='".$row['status']."' class='toggle' type='checkbox'><div class='slider round'></div></label></td>";
+            echo "<td width='20%'><label class='switch'><input eid ='".$row['id']."' status='".$row['status']."' class='toggle' type='checkbox'><div class='slider round'></div></label></td>";
           }
         echo "</tr>";
       }
@@ -56,7 +60,8 @@
     echo "</div>";
     echo "</section>"; 
     ?>
-  <a href="push.php" class="backButton">Back</a>
+  
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
